@@ -30,20 +30,20 @@ public:
     class Iterator 
     {
     public:
-		T& operator * ();
-		const T& operator * () const;
+        T& operator * ();
+        const T& operator * () const;
 
-		T* operator -> ();
-		const T* operator -> () const;
+        T* operator -> ();
+        const T* operator -> () const;
 
-		iterator& operator ++ ();
-		iterator operator ++ (int);
+        Iterator& operator ++ ();
+        Iterator operator ++ (int);
 
-		iterator& operator -- ();
-		iterator operator -- (int);
+        Iterator& operator -- ();
+        Iterator operator -- (int);
 
-		bool operator == (const iterator& other) const;
-		bool operator != (const iterator& other) const;
+        bool operator == (const Iterator& other) const;
+        bool operator != (const Iterator& other) const;
     };
 
     Iterator begin();

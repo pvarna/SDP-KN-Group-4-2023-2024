@@ -170,13 +170,13 @@ public:
             return pointer;
         }
 
-        DynamicArrayIterator& operator ++ ()
+        DynamicArrayIterator& operator ++ () // ++it
         {
             ++pointer;
             return *this;
         }
 
-        DynamicArrayIterator operator ++ (int)
+        DynamicArrayIterator operator ++ (int) // it++
         {
             DynamicArrayIterator old = *this;
             ++(*this);
@@ -344,7 +344,7 @@ int main ()
     }
     std::cout << std::endl;
 
-    for (int currentElement: v)
+    for (int currentElement : v)
     {
         std::cout << currentElement << " ";
     }
@@ -378,7 +378,8 @@ int main ()
     arr.push_back(4);
     arr.push_back(5);
 
-    arr.erase(arr.end() - 1);
+    arr.insert(arr.begin() + 1, 12);
+    arr[1] = 12;
 
     for (int el : arr)
     {
