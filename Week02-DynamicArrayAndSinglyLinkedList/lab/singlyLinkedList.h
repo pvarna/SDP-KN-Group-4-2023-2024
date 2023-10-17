@@ -28,6 +28,8 @@ private:
         this->head = this->tail = nullptr;
     }
 
+    // while (!empty) pop_front()
+
     void copy(const SinglyLinkedList<T>& other)
     {
         if (other.head == nullptr)
@@ -48,6 +50,8 @@ private:
         this->tail = new Box(other.tail->data);
         temp->next = this->tail;
     }
+
+    // for (...other) push_back
 
 public:
     SinglyLinkedList<T>()
@@ -75,6 +79,7 @@ public:
     };
 
     SinglyLinkedList(std::size_t count, const T& value = T())
+        : head(nullptr), tail(nullptr)
     {
         for (std::size_t i = 0; i < count; ++i)
         {
@@ -121,7 +126,21 @@ public:
     {
         this->deallocate();
     }
-    bool empty() const;
+
+    bool empty() const
+    {
+        return this->head == nullptr;
+    }
+
+    void print() const
+    {
+        Box* temp = this->head;
+        while (temp)
+        {
+            std::cout << temp->data << " ";
+            temp = temp->next;
+        }
+    }
 
     void push_back(const T& element)
     {
@@ -136,34 +155,184 @@ public:
             this->tail = this->tail->next;
         }
     }
-    void pop_back();
+    void pop_back()
+    {
+        if (this->head == this->tail)
+        {
+            delete this->head;
+            this->head = this->tail = nullptr;
+            return;
+        }
 
-    void push_front(const T& element);
-    void pop_front();
+        Box* temp = this->head;
+        while (temp->next != this->tail)
+        {
+            temp = temp->next;
+        }
+
+        delete this->tail;
+        this->tail = temp;
+        temp->next = nullptr;
+    }
+
+    void push_front(const T& element)
+    {
+        Box* newBox = new Box(element);
+        if (this->head == nullptr)
+        {
+            this->head = this->tail = newBox;
+        }
+        else
+        {
+            newBox->next = this->head;
+            this->head = newBox;
+        }
+    }
+
+    void pop_front()
+    {
+        if (this->head == this->tail)
+        {
+            delete this->head;
+            this->head = this->tail = nullptr;
+            return;
+        }
+
+        Box* toDelete = this->head;
+        this->head = this->head->next;
+        delete toDelete;
+    }
 
     class Iterator 
     {
+    private:
+        friend class SinglyLinkedList;
+        Box* box;
+
     public:
-        T& operator * ();
-        const T& operator * () const;
+        Iterator(Box* box): box(box) {}
 
-        T* operator -> ();
-        const T* operator -> () const;
+        T& operator * ()
+        {
+            return this->box->data;
+        }
+        const T& operator * () const
+        {
+            return this->box->data;
+        }
 
-        Iterator& operator ++ ();
-        Iterator operator ++ (int);
+        T* operator -> ()
+        {
+            return &this->box->data;
+        }
+        const T* operator -> () const
+        {
+            return &this->box->data;
+        }
 
-        bool operator == (const Iterator& other) const;
-        bool operator != (const Iterator& other) const;
+        // ++i
+        Iterator& operator ++ ()
+        {
+            this->box = this->box->next;
+
+            return *this;
+        }
+
+        // i++
+        Iterator operator ++ (int)
+        {
+            Iterator old = *this;
+
+            ++(*this);
+
+            return old;
+        }
+
+        bool operator == (const Iterator& other) const
+        {
+            return this->box == other.box;
+        }
+
+        bool operator != (const Iterator& other) const
+        {
+            return this->box != other.box;
+        }
     };
 
-    Iterator begin();
-    Iterator end();
+    Iterator begin()
+    {
+        return Iterator(this->head);
+    }
+    Iterator end()
+    {
+        return Iterator(this->tail->next);
+    }
 
-    void insert(Iterator pos, const T& value);
+    void insert_after(Iterator pos, const T& value)
+    {
+        if (pos.box == this->tail)
+        {
+            this->push_back(value);
+            return;
+        }
 
-    void erase(Iterator first, Iterator last);
-    void erase(Iterator pos);
+        Box* newElement = new Box(value);
+
+        newElement->next = pos.box->next;
+        pos.box->next = newElement;
+    }
+
+    void erase(Iterator first, Iterator last)
+    {
+        if (first == this->begin())
+        {
+            while (this->head != last.box)
+            {
+                this->pop_front();
+            }
+            return;
+        }
+        
+        Box* temp = this->head;
+        while (temp->next != first.box)
+        {
+            temp = temp->next;
+        }
+        if (last == this->end())
+        {
+            this->tail = temp;
+        }
+
+        Box* toDelete;
+        while (first != last)
+        {
+            toDelete = first.box;
+            first++;
+            delete toDelete;
+        }
+
+        temp->next = last.box;
+    }
+    void erase(Iterator pos)
+    {
+        if (pos.box == this->head)
+        {
+            this->pop_front();
+            return;
+        }
+
+        Box* temp = this->head;
+        while (temp->next != pos.box)
+        {
+            temp = temp->next;
+        }
+        if (pos.box == this->tail)
+        {
+            this->tail = temp;
+        }
+        temp->next = pos.box->next;
+        delete pos.box;
+    }
 
     void splice_after(Iterator pos, SinglyLinkedList<T>& other);
     void merge(SinglyLinkedList<T>& other);
