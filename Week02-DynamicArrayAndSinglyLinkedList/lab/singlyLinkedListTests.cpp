@@ -7,15 +7,15 @@ TEST_CASE("List create/destroy")
 {
 	SECTION("Default constructor") 
     {
-        DoublyLinkedList<int> instance;
+        SinglyLinkedList<int> instance;
         REQUIRE(instance.size() == 0);
 	}
 
 	SECTION("Copy constructor / operator=") 
     {
-        DoublyLinkedList<int> instance;
-        DoublyLinkedList<int> copy(instance);
-        DoublyLinkedList<int> assign;
+        SinglyLinkedList<int> instance;
+        SinglyLinkedList<int> copy(instance);
+        SinglyLinkedList<int> assign;
         assign = instance;
         REQUIRE(instance.size() == 0);
         REQUIRE(copy.size() == 0);
@@ -24,13 +24,13 @@ TEST_CASE("List create/destroy")
 
 	SECTION("Constructor with count") 
     {
-		DoublyLinkedList<int> instance(15);
+		SinglyLinkedList<int> instance(15);
 		REQUIRE(instance.size() == 15);
 	}
 
 	SECTION("Constructor with count and value") 
     {
-		DoublyLinkedList<int> instance(17, 5);
+		SinglyLinkedList<int> instance(17, 5);
         REQUIRE(instance.size() == 17);
 
         REQUIRE(instance.front() == 5);
@@ -39,13 +39,13 @@ TEST_CASE("List create/destroy")
 
 	SECTION("Copy and assign non-empty list") 
     {
-        DoublyLinkedList<int> instance(10);
+        SinglyLinkedList<int> instance(10);
         REQUIRE(instance.size() == 10);
 
-        DoublyLinkedList<int> copy(instance);
+        SinglyLinkedList<int> copy(instance);
         REQUIRE(copy.size() == 10);
 
-        DoublyLinkedList<int> assign;
+        SinglyLinkedList<int> assign;
         REQUIRE(assign.size() == 0);
 		assign = copy;
 		REQUIRE(assign.size() == copy.size());
@@ -53,7 +53,7 @@ TEST_CASE("List create/destroy")
 
 	SECTION("Clear after constructor with count") 
     {
-		DoublyLinkedList<int> instance(31);
+		SinglyLinkedList<int> instance(31);
         REQUIRE(instance.size() == 31);
 
         instance.clear();
@@ -65,7 +65,7 @@ TEST_CASE("List back/front modify")
 {
 	SECTION("Push_back and pop_back all") 
     {
-		DoublyLinkedList<int> instance;
+		SinglyLinkedList<int> instance;
         for (int c = 0; c < 21; c++) 
         {
             instance.push_back(0);
@@ -81,7 +81,7 @@ TEST_CASE("List back/front modify")
 
 	SECTION("Repeated push_back/pop_back") 
     {
-		DoublyLinkedList<int> instance;
+		SinglyLinkedList<int> instance;
         for (int c = 0; c < 100; c++) 
         {
             instance.push_back(0);
@@ -92,7 +92,7 @@ TEST_CASE("List back/front modify")
 
 	SECTION("Repeated push_back/back") 
     {
-		DoublyLinkedList<int> instance;
+		SinglyLinkedList<int> instance;
         int value = 0;
         for (int c = 0; c < 100; c++) 
         {
@@ -105,7 +105,7 @@ TEST_CASE("List back/front modify")
 
 	SECTION("Push_front and pop_front all") 
     {
-		DoublyLinkedList<int> instance;
+		SinglyLinkedList<int> instance;
         for (int c = 0; c < 21; c++) 
         {
             instance.push_front(0);
@@ -121,7 +121,7 @@ TEST_CASE("List back/front modify")
 
 	SECTION("Repeated push_front/pop_front") 
     {
-		DoublyLinkedList<int> instance;
+		SinglyLinkedList<int> instance;
         for (int c = 0; c < 100; c++) 
         {
             instance.push_front(0);
@@ -132,7 +132,7 @@ TEST_CASE("List back/front modify")
 
 	SECTION("Repeated push_front/front") 
     {
-		DoublyLinkedList<int> instance;
+		SinglyLinkedList<int> instance;
         int value = 0;
         for (int c = 0; c < 100; c++) 
         {
@@ -148,26 +148,26 @@ TEST_CASE("List iterator access")
 {
 	SECTION("Iterator creation and operators") 
     {
-		DoublyLinkedList<int> instance(3, 0);
-        typename DoublyLinkedList<int>::Iterator it = instance.begin();
+		SinglyLinkedList<int> instance(3, 0);
+        typename SinglyLinkedList<int>::Iterator it = instance.begin();
         REQUIRE(*it == 0);
         REQUIRE(it == instance.begin());
-        typename DoublyLinkedList<int>::Iterator end = instance.end();
+        typename SinglyLinkedList<int>::Iterator end = instance.end();
         REQUIRE(end == instance.end());
 	}
 
 	SECTION("Iterator value modification") 
     {
-		DoublyLinkedList<int> instance(3);
+		SinglyLinkedList<int> instance(3);
         int value = 0;
         
-        for (typename DoublyLinkedList<int>::Iterator it = instance.begin(); it != instance.end(); ++it) 
+        for (typename SinglyLinkedList<int>::Iterator it = instance.begin(); it != instance.end(); ++it) 
         {
             *it = ++value;
         }
 
         value = 0;
-        for (typename DoublyLinkedList<int>::Iterator it = instance.begin(); it != instance.end(); ++it) 
+        for (typename SinglyLinkedList<int>::Iterator it = instance.begin(); it != instance.end(); ++it) 
         {
             REQUIRE(*it == ++value);
         }
@@ -175,7 +175,7 @@ TEST_CASE("List iterator access")
 	
 	SECTION("Iterator insert/erase") 
     {
-		DoublyLinkedList<int> instance(1, 0);
+		SinglyLinkedList<int> instance(1, 0);
         int value = 0;
 
         instance.insert(instance.begin(), ++value);
@@ -184,7 +184,7 @@ TEST_CASE("List iterator access")
         instance.insert(instance.end(), ++value);
         REQUIRE(instance.back() == value);
 
-        DoublyLinkedList<int> copy = instance;
+        SinglyLinkedList<int> copy = instance;
 
         instance.erase(instance.begin());
         REQUIRE(instance.front() == 0);
@@ -198,8 +198,8 @@ TEST_CASE("List element operations")
 {
 	SECTION("Splice after") 
     {
-		DoublyLinkedList<int> source;
-        DoublyLinkedList<int> destination;
+		SinglyLinkedList<int> source;
+        SinglyLinkedList<int> destination;
         std::vector<int*> sourceItems;
         int value = 0;
         const int itemCount = 2;
@@ -217,21 +217,21 @@ TEST_CASE("List element operations")
             ++value;
         }
 
-        typename DoublyLinkedList<int>::Iterator begin1 = destination.begin();
+        typename SinglyLinkedList<int>::Iterator begin1 = destination.begin();
         destination.splice_after(++begin1, source);
 
         REQUIRE(destination.size() == 4);
         REQUIRE(source.size() == 0);
 
-        typename DoublyLinkedList<int>::Iterator it = destination.begin();
+        typename SinglyLinkedList<int>::Iterator it = destination.begin();
         REQUIRE(&*(++it) == sourceItems[0]);
         REQUIRE(&*(++it) == sourceItems[1]);
 	}
 
 	SECTION("Merge") 
     {
-		DoublyLinkedList<int> destination;
-        DoublyLinkedList<int> source;
+		SinglyLinkedList<int> destination;
+        SinglyLinkedList<int> source;
         std::vector<int*> sourceItems;
         int value = 0;
         const int itemCount = 10;
@@ -255,8 +255,8 @@ TEST_CASE("List element operations")
         REQUIRE(destination.size() == 10);
         REQUIRE(source.size() == 0);
 
-        typename DoublyLinkedList<int>::Iterator current = destination.begin();
-        typename DoublyLinkedList<int>::Iterator next = ++destination.begin();
+        typename SinglyLinkedList<int>::Iterator current = destination.begin();
+        typename SinglyLinkedList<int>::Iterator next = ++destination.begin();
         for (; next != destination.end(); ++current, ++next) 
         {
             REQUIRE(*current <= *next);
@@ -274,7 +274,7 @@ TEST_CASE("List element operations")
 
 	SECTION("Unique") 
     {
-		DoublyLinkedList<int> instance;
+		SinglyLinkedList<int> instance;
         std::vector<int*> itemsLeft;
         int value = 0;
         const int itemCount = 10;
@@ -297,7 +297,7 @@ TEST_CASE("List element operations")
         REQUIRE(instance.size() == 5);
 
         int itemsLeftIx = 0;
-        for (typename DoublyLinkedList<int>::Iterator it = instance.begin(); it != instance.end(); ++it) 
+        for (typename SinglyLinkedList<int>::Iterator it = instance.begin(); it != instance.end(); ++it) 
         {
             REQUIRE(&(*it) == itemsLeft[itemsLeftIx]);
             ++itemsLeftIx;

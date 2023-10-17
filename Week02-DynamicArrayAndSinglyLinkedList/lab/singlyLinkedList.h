@@ -1,7 +1,7 @@
 #pragma once
 
 template <class T>
-class DoublyLinkedList
+class SinglyLinkedList
 {
 private:
     struct Box
@@ -28,7 +28,7 @@ private:
         this->head = this->tail = nullptr;
     }
 
-    void copy(const DoublyLinkedList<T>& other)
+    void copy(const SinglyLinkedList<T>& other)
     {
         if (other.head == nullptr)
         {
@@ -50,10 +50,10 @@ private:
     }
 
 public:
-    DoublyLinkedList<T>()
+    SinglyLinkedList<T>()
       : head(nullptr), tail(nullptr) {}
 
-    DoublyLinkedList<T>& operator = (const DoublyLinkedList<T>& other)
+    SinglyLinkedList<T>& operator = (const SinglyLinkedList<T>& other)
     {
         if (this != &other)
         {
@@ -64,17 +64,17 @@ public:
         return *this;
     }
 
-    DoublyLinkedList<T>(const DoublyLinkedList<T>& other)
+    SinglyLinkedList<T>(const SinglyLinkedList<T>& other)
     {
         this->copy(other);
     }
 
-    ~DoublyLinkedList<T>() 
+    ~SinglyLinkedList<T>() 
     {
         this->deallocate();
     };
 
-    DoublyLinkedList(std::size_t count, const T& value = T())
+    SinglyLinkedList(std::size_t count, const T& value = T())
     {
         for (std::size_t i = 0; i < count; ++i)
         {
@@ -165,7 +165,7 @@ public:
     void erase(Iterator first, Iterator last);
     void erase(Iterator pos);
 
-    void splice_after(Iterator pos, DoublyLinkedList& other);
-    void merge(DoublyLinkedList& other);
+    void splice_after(Iterator pos, SinglyLinkedList<T>& other);
+    void merge(SinglyLinkedList<T>& other);
     void unique();
 };
