@@ -7,3 +7,5 @@
 - [List of data structures](https://en.wikipedia.org/wiki/List_of_data_structures)
 
 - [Analysis of Algorithms | Big-O analysis](https://www.geeksforgeeks.org/analysis-algorithms-big-o-analysis/)
+
+**Credit:** доц. д-р Петър Армянов
