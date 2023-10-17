@@ -264,8 +264,10 @@ TEST_CASE("List element operations")
 
         current = destination.begin();
         int sourceItemIx = 0;
-        for (int i = 0; current != destination.end(); ++i, ++current) {
-            if (i % 2 == 1) {
+        for (int i = 0; current != destination.end(); ++i, ++current) 
+        {
+            if (i % 2 == 1) 
+            {
                 REQUIRE(&(*current) == sourceItems[sourceItemIx]);
                 sourceItemIx++;
             }
