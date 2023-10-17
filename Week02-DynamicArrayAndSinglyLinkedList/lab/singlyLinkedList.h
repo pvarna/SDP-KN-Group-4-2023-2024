@@ -1,7 +1,7 @@
 #pragma once
 
 template <class T>
-class SinglyLinkedList
+class DoublyLinkedList
 {
 private:
     struct Box
@@ -28,7 +28,7 @@ private:
         this->head = this->tail = nullptr;
     }
 
-    void copy(const SinglyLinkedList<T>& other)
+    void copy(const DoublyLinkedList<T>& other)
     {
         if (other.head == nullptr)
         {
@@ -50,10 +50,10 @@ private:
     }
 
 public:
-    SinglyLinkedList<T>()
+    DoublyLinkedList<T>()
       : head(nullptr), tail(nullptr) {}
 
-    SinglyLinkedList<T>& operator = (const SinglyLinkedList<T>& other)
+    DoublyLinkedList<T>& operator = (const DoublyLinkedList<T>& other)
     {
         if (this != &other)
         {
@@ -64,17 +64,17 @@ public:
         return *this;
     }
 
-    SinglyLinkedList<T>(const SinglyLinkedList<T>& other)
+    DoublyLinkedList<T>(const DoublyLinkedList<T>& other)
     {
         this->copy(other);
     }
 
-    ~SinglyLinkedList<T>() 
+    ~DoublyLinkedList<T>() 
     {
         this->deallocate();
     };
 
-    SinglyLinkedList(std::size_t count, const T& value = T())
+    DoublyLinkedList(std::size_t count, const T& value = T())
     {
         for (std::size_t i = 0; i < count; ++i)
         {
@@ -153,9 +153,6 @@ public:
         Iterator& operator ++ ();
         Iterator operator ++ (int);
 
-        Iterator& operator -- ();
-        Iterator operator -- (int);
-
         bool operator == (const Iterator& other) const;
         bool operator != (const Iterator& other) const;
     };
@@ -168,7 +165,7 @@ public:
     void erase(Iterator first, Iterator last);
     void erase(Iterator pos);
 
-    void splice_after(Iterator pos, SinglyLinkedList& other);
-    void merge(SinglyLinkedList& other);
+    void splice_after(Iterator pos, DoublyLinkedList& other);
+    void merge(DoublyLinkedList& other);
     void unique();
 };
