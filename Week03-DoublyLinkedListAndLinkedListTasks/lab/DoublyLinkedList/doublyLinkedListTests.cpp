@@ -223,7 +223,7 @@ TEST_CASE("List element operations")
         }
 
         typename DoublyLinkedList<int>::Iterator begin1 = destination.begin();
-        destination.splice_after(++begin1, source);
+        destination.splice_after(begin1, source);
 
         REQUIRE(destination.size() == 4);
         REQUIRE(source.size() == 0);
@@ -299,7 +299,7 @@ TEST_CASE("List element operations")
                 ++value;
             }
         }
-
+        
         instance.unique();
         REQUIRE(instance.size() == 5);
 
