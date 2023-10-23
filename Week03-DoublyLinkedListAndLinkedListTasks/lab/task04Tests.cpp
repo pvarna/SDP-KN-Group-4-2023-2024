@@ -22,5 +22,6 @@ TEST_CASE("Task 04")
         removeElements(list, 7);
 
         REQUIRE(list == nullptr);
+        deallocate(list);
     }
 }

@@ -4,16 +4,22 @@
 struct TripleBox
 {
     int value;
-    Box* next;
-    Box* previous;
-    Box* child;
+    TripleBox* next;
+    TripleBox* previous;
+    TripleBox* child;
+
+    TripleBox(int value, TripleBox* next = nullptr, TripleBox* previous = nullptr, TripleBox* child = nullptr)
+        : value(value), next(next), previous(previous), child(child) {}
 };
 
 struct DoubleBox
 {
     int value;
-    Box* next;
-    Box* previous;
+    DoubleBox* next;
+    DoubleBox* previous;
+
+    DoubleBox(int value, DoubleBox* next = nullptr, DoubleBox* previous = nullptr)
+        : value(value), next(next), previous(previous) {}
 };
 
-DoubleBox* getDecimalValue(TripleBox* head);
+DoubleBox* flatten(TripleBox* head);

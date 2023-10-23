@@ -31,7 +31,6 @@ TEST_CASE("Task 03")
         Box* list2 = list2box1;
         REQUIRE(getIntersectionNode(list1, list2) == commonBox1);
 
-        // Add deallocation
     }
 
     SECTION("Test case 2")
@@ -57,7 +56,8 @@ TEST_CASE("Task 03")
         Box* list2 = list2box1;
         REQUIRE(getIntersectionNode(list1, list2) == commonBox1);
 
-        // Add deallocation
+        deallocate(list1);
+        delete list2box1;
     }
 
     SECTION("Test case 3")
@@ -66,6 +66,7 @@ TEST_CASE("Task 03")
         Box* list2 = new Box(1, new Box(5));
         REQUIRE(getIntersectionNode(list1, list2) == nullptr);
 
-        // Add deallocation
+        deallocate(list1);
+        deallocate(list2);
     }
 }

@@ -18,7 +18,7 @@ TEST_CASE("Task 02")
         Box* list = box1;
         REQUIRE(hasCycle(list));
 
-        // Add deallocation
+        deallocateWithCycle(list);
     }
 
     SECTION("Test case 2")
@@ -31,7 +31,7 @@ TEST_CASE("Task 02")
         Box* list = box1;
         REQUIRE(hasCycle(list));
 
-        // Add deallocation
+        deallocateWithCycle(list);
     }
 
     SECTION("Test case 3")
@@ -39,7 +39,7 @@ TEST_CASE("Task 02")
         Box* list = new Box(1);
         REQUIRE_FALSE(hasCycle(list));
 
-        // Add deallocation
+        deallocateWithCycle(list);
     }
 
     SECTION("Test case 4")
@@ -47,6 +47,6 @@ TEST_CASE("Task 02")
         Box* list = new Box(1, new Box(2, new Box(3, new Box(4))));
         REQUIRE_FALSE(hasCycle(list));
 
-        // Add deallocation
+        deallocateWithCycle(list);
     }
 }
