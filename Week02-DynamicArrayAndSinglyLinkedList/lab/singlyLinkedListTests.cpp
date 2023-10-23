@@ -1,7 +1,6 @@
 #define CATCH_CONFIG_MAIN
 #include "catch2.hpp"
-// #include "singlyLinkedList.h"
-#include "linkedList_Alex.hpp"
+#include "singlyLinkedList.h"
 #include <vector>
 
 TEST_CASE("List create/destroy") 

@@ -334,7 +334,125 @@ public:
         delete pos.box;
     }
 
-    void splice_after(Iterator pos, SinglyLinkedList<T>& other);
-    void merge(SinglyLinkedList<T>& other);
-    void unique();
+    void splice_after(Iterator pos, SinglyLinkedList<T>& other) 
+    {
+        if (other.empty()) 
+        {
+            return;
+        }
+
+        if (this->empty()) 
+        {
+            this->head = other.head;
+            this->tail = other.tail;
+        }
+        else 
+        {
+            other.tail->next = pos.box->next;
+            pos.box->next = other.head;
+
+            if (pos.box == this->tail) 
+            {
+                this->tail = other.tail;
+            }
+        }
+
+        other.head = other.tail = nullptr;
+    }
+
+    void merge(SinglyLinkedList& other) 
+    {
+        if (this->empty()) 
+        {
+            this->head = other.head;
+            this->tail = other.tail;
+
+            other.head = other.tail = nullptr;
+            return;
+        }
+
+        if (other.empty()) 
+        {
+            return;
+        }
+        
+        Box* newHead;
+        Iterator current(nullptr);
+        
+        Iterator it(this->head);
+        Iterator otherIt(other.head);
+
+        if (*it <= *otherIt) 
+        {
+            newHead = this->head;
+            current.box = newHead;
+            ++it;
+        }
+        else 
+        {
+            newHead = other.head;
+            current.box = newHead;
+            ++otherIt;
+        }
+
+        while (it != this->end() && otherIt != other.end()) 
+        {
+            if (*it <= *otherIt) 
+            {
+                current.box->next = it.box;
+                ++current;
+                ++it;
+            }
+
+            else 
+            {
+                current.box->next = otherIt.box;
+                ++current;
+                ++otherIt;
+            }
+        }
+
+        if (it != this->end()) 
+        {
+            current.box->next = it.box;
+        }
+        else 
+        {
+            current.box->next = otherIt.box;
+            this->tail = other.tail;
+        }
+
+        this->head = newHead;
+        other.head = other.tail = nullptr;
+
+    }
+
+    void unique() 
+    {
+        if (this->empty()) 
+        {
+            return;
+        }
+
+        Iterator current(head);
+        Iterator next(head->next);
+
+        while (true) 
+        {
+            while (next != this->end() && *next == *current) 
+            {
+                Iterator toDelete = next;
+                ++next;
+                erase(toDelete);
+            }
+
+            if (next == this->end()) 
+            {
+                return;
+            }
+
+            current = next;
+            ++next;
+        }
+    }
 };
