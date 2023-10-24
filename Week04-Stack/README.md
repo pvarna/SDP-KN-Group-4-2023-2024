@@ -48,7 +48,7 @@ abcdcba
 true
 
 Примерен вход 3:
-aaa
+aab
 Примерен изход 3:
 false
 ```
