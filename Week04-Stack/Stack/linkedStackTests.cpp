@@ -57,7 +57,7 @@ TEST_CASE("Testing LinkedStack")
         stack.push(1);
         stack.push(2);
 
-        LinkedStack<int> copyStack;
+        LinkedStack<int> copyStack(stack);
 
         REQUIRE(copyStack.top() == stack.top());
         stack.pop();
