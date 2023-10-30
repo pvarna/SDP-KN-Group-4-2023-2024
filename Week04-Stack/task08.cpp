@@ -3,7 +3,6 @@
 
 void sortStack(std::stack<int>& stack) 
 {
-
     std::stack<int> sorted_stack;
     std::stack<int> buff;
 
