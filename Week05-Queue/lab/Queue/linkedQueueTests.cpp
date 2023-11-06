@@ -12,7 +12,7 @@ TEST_CASE("Testing LinkedQueue")
         queue.enqueue(1);
         REQUIRE(queue.front() == 1);
         queue.enqueue(2);
-        REQUIRE(queue.front() == 2);
+        REQUIRE(queue.front() == 1);
     }
 
     SECTION("Dequeue") 
@@ -22,7 +22,7 @@ TEST_CASE("Testing LinkedQueue")
         queue.enqueue(1);
         queue.enqueue(2);
         queue.dequeue();
-        REQUIRE(queue.front() == 1);
+        REQUIRE(queue.front() == 2);
         queue.dequeue();
         REQUIRE(queue.empty());
     }

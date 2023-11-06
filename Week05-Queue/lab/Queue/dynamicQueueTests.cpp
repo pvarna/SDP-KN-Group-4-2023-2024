@@ -12,7 +12,7 @@ TEST_CASE("Testing DynamicQueue")
         queue.enqueue("Apple");
         REQUIRE(queue.front() == "Apple");
         queue.enqueue("Banana");
-        REQUIRE(queue.front() == "Banana");
+        REQUIRE(queue.front() == "Apple");
     }
 
     SECTION("Front") 
@@ -22,7 +22,7 @@ TEST_CASE("Testing DynamicQueue")
         queue.enqueue("Apple");
         queue.enqueue("Banana");
         queue.dequeue();
-        REQUIRE(queue.front() == "Apple");
+        REQUIRE(queue.front() == "Banana");
         queue.dequeue();
         REQUIRE(queue.empty());
     }
