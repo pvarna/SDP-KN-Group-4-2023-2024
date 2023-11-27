@@ -1,4 +1,3 @@
 #pragma once
 
-
-int fact(int n);
+long long fact(int n);

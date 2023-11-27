@@ -1,13 +1,14 @@
-add_library(math)
+add_library(person)
 
 target_include_directories(
-    math
+    person
     PUBLIC
     include/
 )
 
 target_sources(
-    math
+    person
     PUBLIC
-    fact.cpp
+    egn.cpp
+    person.cpp
 )

@@ -1,15 +1,16 @@
 add_executable(
-    hello
-)
-
-target_sources(
-    hello
-    PUBLIC
-    main.cpp
+    app
 )
 
 target_link_libraries(
-    hello
+    app
     PUBLIC
-    mathlib
+    math
+    person
+)
+
+target_sources(
+    app
+    PUBLIC
+    main.cpp
 )
