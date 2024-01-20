@@ -11,8 +11,7 @@ private:
 public:
     Graph(int vertices);
     void addEdge(int v, int w); // Function to add an edge to the graph
-    void BFS(int startNode) const; // Breadth-First Search traversal
-    std::size_t levels(int startNode) const;
+    std::size_t levels(int start) const;
 };
 
 Graph::Graph(int vertices)
@@ -26,7 +25,7 @@ void Graph::addEdge(int v, int w)
     adjacencyList[v].push_back(w);
 }
 
-std::size_t Graph::levels(int startNode) const
+std::size_t Graph::levels(int start) const
 {
     std::vector<bool> visited(this->vertices, false);
     std::queue<int> q;
@@ -35,7 +34,7 @@ std::size_t Graph::levels(int startNode) const
                 elementsAtNextLevel = 0;
 
 
-    q.push(startNode);
+    q.push(start);
 
     while (!q.empty()) 
     {
@@ -67,33 +66,6 @@ std::size_t Graph::levels(int startNode) const
     }
 
     return level;
-}
-
-void Graph::BFS(int startNode) const
-{
-    std::vector<bool> visited(this->vertices, false);
-    std::queue<int> q;
-    q.push(startNode);
-
-    while (!q.empty()) 
-    {
-        int current = q.front();
-        q.pop();
-
-        if (!visited[current]) 
-        {
-            std::cout << current << " ";
-            visited[current] = true;
-
-            for (int neighbour : adjacencyList[current]) 
-            {
-                if (!visited[neighbour]) 
-                {
-                    q.push(neighbour);
-                }
-            }
-        }
-    }
 }
 
 int main() 
