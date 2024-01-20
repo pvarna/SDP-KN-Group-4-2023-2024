@@ -1,0 +1,3 @@
+What are text files? 
+As the name suggests, a text file is a computer file that contains text, though the specific type of file wi
+ll determine whether it contains simple plain text or special formatting such as bolds and italics.
